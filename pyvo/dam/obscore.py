@@ -8,9 +8,32 @@ __all__ = ['ObsCoreMetadata', 'POLARIZATION_STATES', 'CALIBRATION_LEVELS']
 
 
 # to be moved to ObsCore
+# did you consider using an Enum? This might be the better solution.
 POLARIZATION_STATES = ['I', 'Q', 'U', 'V', 'RR', 'LL', 'RL', 'LR',
                        'XX', 'YY', 'XY', 'YX', 'POLI', 'POLA']
 CALIBRATION_LEVELS = [0, 1, 2, 3, 4]
+
+# use a dataclass here and consider splitting it up to sort all the variables.
+# This class here looks much too big.
+# Here is an example how to 
+@dataclass
+class ObservationInfo:
+    dataproduct_type: str # don't know what types these are
+    dataproduct_subtype: str
+    calib_level: []
+
+@dataclass
+class TargetInfo:
+    # ...
+
+# ...
+
+@dataclass
+class ObsCoreMetadata:
+    observation_info: ObservationInfo
+    target_info: TargetInfo
+    data_description: DataDescription
+    # etc.
 
 
 class ObsCoreMetadata():
